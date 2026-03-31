@@ -6,24 +6,47 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-
+    
     <div id="loginContainer">
         <h2>Login</h2>
         <input type="text" id="usuario" placeholder="Usuario">
         <input type="password" id="password" placeholder="Contraseña">
         <button onclick="login()">Entrar</button>
+        <p id="mensajeLogin" style="color:red;"></p>
     </div>
 
-    
     <div id="app" style="display:none;">
         <h1>CRUD de Usuarios</h1>
 
         <input type="text" id="nombre" placeholder="Nombre">
         <button onclick="agregarUsuario()">Agregar</button>
 
+        <!-- ✅ SOLO UN MENSAJE -->
+        <p id="mensaje" style="color:red;"></p>
+
+        <p id="contador">Total usuarios: 0</p>
+
         <ul id="listaUsuarios"></ul>
     </div>
 
+    <!-- MODAL -->
+    <div id="confirmModal" style="
+        display:none;
+        position:fixed;
+        top:30%;
+        left:40%;
+        background:white;
+        padding:20px;
+        border-radius:10px;
+        box-shadow:0px 0px 10px gray;
+        text-align:center;
+    ">
+        <p>¿Seguro que quieres eliminar?</p>
+        <button onclick="confirmarEliminar()">Sí</button>
+        <button onclick="cerrarModal()">No</button>
+    </div>
+
     <script src="app.js"></script>
+
 </body>
 </html>

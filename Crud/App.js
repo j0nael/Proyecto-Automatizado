@@ -1,30 +1,38 @@
 let usuarios = [];
 let editando = false;
 let indiceEditar = -1;
+let indiceEliminar = -1;
 
 function login() {
     let user = document.getElementById("usuario").value;
     let pass = document.getElementById("password").value;
 
+    let mensaje = document.getElementById("mensajeLogin");
+
     if (user === "admin" && pass === "1234") {
+        mensaje.textContent = ""; // limpiar mensaje
+
         document.getElementById("loginContainer").style.display = "none";
         document.getElementById("app").style.display = "block";
     } else {
-        alert("Credenciales incorrectas");
+        mensaje.textContent = "Credenciales incorrectas";
     }
 }
-
-function agregarUsuario() {
+ function agregarUsuario() {
     let input = document.getElementById("nombre");
     let nombre = input.value;
 
-   if (nombre.trim() === "") {
-        alert("Ingrese un nombre");
+    let mensaje = document.getElementById("mensaje");
+
+    if (nombre.trim() === "") {
+        mensaje.textContent = "Ingrese un nombre";
         return;
     }
 
+    mensaje.textContent = ""; 
+
     if (editando) {
-       usuarios[indiceEditar] = nombre + " (editado)";
+        usuarios[indiceEditar] = nombre;
         editando = false;
         indiceEditar = -1;
     } else {
@@ -49,17 +57,25 @@ function mostrarUsuarios() {
         `;
 
         lista.appendChild(li);
-        
     });
+
     let contador = document.getElementById("contador");
-contador.textContent = "Total usuarios: " + usuarios.length;
+    contador.textContent = "Total usuarios: " + usuarios.length;
 }
 
 function eliminarUsuario(index) {
-    if (confirm("¿Seguro que quieres eliminar?")) {
-        usuarios.splice(index, 1);
-        mostrarUsuarios();
-    }
+    indiceEliminar = index;
+    document.getElementById("confirmModal").style.display = "block";
+}
+
+function confirmarEliminar() {
+    usuarios.splice(indiceEliminar, 1);
+    mostrarUsuarios();
+    cerrarModal();
+}
+
+function cerrarModal() {
+    document.getElementById("confirmModal").style.display = "none";
 }
 
 function editarUsuario(index) {
