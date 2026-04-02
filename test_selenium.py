@@ -16,7 +16,6 @@ def driver():
     yield driver
     driver.quit()
 
-# 🔐 LOGIN EXITOSO
 def test_login_exitoso(driver):
     driver.get(URL)
     time.sleep(2)
@@ -35,7 +34,6 @@ def test_login_exitoso(driver):
 
     assert "CRUD de Usuarios" in driver.page_source
 
-# ❌ LOGIN NEGATIVO
 def test_login_negativo(driver):
     driver.get(URL)
 
@@ -56,7 +54,6 @@ def test_login_negativo(driver):
 
     assert "Credenciales incorrectas" in driver.page_source
 
-# ➕ CREAR USUARIO
 def test_crear_usuario(driver):
     driver.get(URL)
     time.sleep(2)
@@ -80,7 +77,6 @@ def test_crear_usuario(driver):
 
     assert "Juan" in driver.page_source
 
-# ✏️ EDITAR USUARIO
 def test_editar_usuario(driver):
     driver.get(URL)
     time.sleep(2)
@@ -113,8 +109,6 @@ def test_editar_usuario(driver):
 
     assert "Jonathan" in driver.page_source
 
-# 🗑️ ELIMINAR USUARIO
-# 🗑️ ELIMINAR USUARIO
 def test_eliminar_usuario(driver):
     driver.get(URL)
     time.sleep(2)
@@ -131,18 +125,18 @@ def test_eliminar_usuario(driver):
     time.sleep(2)
     driver.save_screenshot("screenshots/eliminar_01_creado.png")
 
-    # click eliminar
+
     driver.find_element(By.XPATH, "//button[contains(text(),'Eliminar')]").click()
     time.sleep(1)
 
-    # click botón "Sí"
+
     driver.find_element(By.XPATH, "//button[text()='Sí']").click()
 
     time.sleep(2)
     driver.save_screenshot("screenshots/eliminar_02_eliminado.png")
 
     assert "Pedro" not in driver.page_source
-# 🚫 CAMPO VACÍO
+
 def test_campo_vacio(driver):
     driver.get(URL)
     time.sleep(2)
@@ -161,4 +155,4 @@ def test_campo_vacio(driver):
 
     driver.save_screenshot("screenshots/vacio_02.png")
 
-    assert True  # solo validamos que no crashee
+    assert True 
