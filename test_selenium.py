@@ -16,6 +16,16 @@ def driver():
     yield driver
     driver.quit()
 
+    
+def test_google(driver):
+    driver.get("https://www.google.com")
+    time.sleep(2)
+
+    driver.save_screenshot("screenshots/google_test.png")
+
+    assert "Google" in driver.title
+
+
 def test_login_exitoso(driver):
     driver.get(URL)
     time.sleep(2)
